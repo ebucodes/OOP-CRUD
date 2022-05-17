@@ -87,4 +87,27 @@ class Model
         }
         return $data;
     }
+    // Update user data
+    public function edit($id)
+    {
+        $data = null;
+
+        $query = "SELECT * FROM records WHERE id = '$id'";
+        if ($sql = $this->conn->query($query)) {
+            while ($row = $sql->fetch_assoc()) {
+                # code...
+                $data = $row;
+            }
+        }
+        return $data;
+    }
+    public function update($data)
+    {
+        $query = "UPDATE records SET firstname='$data[firstname]',lastname='$data[lastname]',username='$data[username]',email='$data[email]' WHERE id='$data[id]'";
+        if ($sql = $this->conn->query($query)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
