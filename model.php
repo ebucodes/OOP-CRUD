@@ -30,35 +30,20 @@ class Model
             if ($sql = $this->conn->query($query)) {
 ?>
                 <script>
-                    setTimeout(function() {
-                            swal({
-                                title: 'Congratulations!!!',
-                                text: 'Registration was successfully.',
-                                icon: 'success',
-                                button: 'OK',
-                            }).then(function() {
-                                window.location = 'read.php';
-                            });
-                        },
-                        100);
+                    alert("New user created");
+                </script>
+                <script>
+                    window.location.href = "records.php";
                 </script>
             <?php
 
             } else {
             ?>
                 <script>
-                    setTimeout(function() {
-                            swal({
-                                title: 'Error!!',
-                                text: 'Registration was successfully.',
-                                html: true,
-                                icon: 'error',
-                                button: 'OK',
-                            }).then(function() {
-                                window.location = 'index.php';
-                            });
-                        },
-                        100);
+                    alert("User not created");
+                </script>
+                <script>
+                    window.location.href = "create.php";
                 </script>
 <?php
 
@@ -77,5 +62,15 @@ class Model
             }
         }
         return $data;
+    }
+    // Delete user
+    public function delete($id)
+    {
+        $query = "DELETE FROM records WHERE id = '$id'";
+        if ($sql = $this->conn->query($query)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
