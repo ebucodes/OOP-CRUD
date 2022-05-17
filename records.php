@@ -44,7 +44,7 @@
     <main class="container">
         <div class="card text-center">
             <div class="card-header">
-                <h4 class="card-title">OOP CRUD (Read)</h4>
+                <h4 class="card-title">OOP CRUD (Data of all users)</h4>
             </div>
             <div class="card-body">
                 <div class="row">
