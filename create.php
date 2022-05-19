@@ -1,7 +1,7 @@
 <?php
-include("model.php");
-$model = new Model();
-$insert = $model->insert();
+include("classes/model.php");
+$user = new User();
+$create = $user->create();
 ?>
 
 <!doctype html>
@@ -13,16 +13,12 @@ $insert = $model->insert();
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.84.0">
-    <title>EbuCodes · Register</title>
+    <title>EbuCodes · OOP</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- Favicon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/fontawesome.min.css">
-    <!-- Sweetalert -->
-    <!-- <link rel="stylesheet" href="../assets/css/sweetalert.min.css"> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css" integrity="sha512-hwwdtOTYkQwW2sedIsbuP1h0mWeJe/hFOfsvNKpRB3CkRxq8EW7QMheec1Sgd8prYxGm1OM9OZcGW7/GUud5Fw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" integrity="sha512-gOQQLjHRpD3/SEOtalVq50iDn4opLVup2TF8c4QPI3/NmUPNZOk2FG0ihi8oCU/qYEsw4P6nuEZT2lAG0UNYaw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -38,18 +34,29 @@ $insert = $model->insert();
             }
         }
     </style>
-
-
-    <!-- Custom styles for this template -->
-    <link href="assets/css/style.css" rel="stylesheet">
 </head>
 
 <body class="bg-light">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+            <h4 class="navbar-brand" style="color: red;">Ebu<b style="color: green;">Codes</b></h4>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+
+                </ul>
+                <a href="logout.php" class="btn btn-danger">Log Out</a>
+
+            </div>
+        </div>
+    </nav>
     <br><br><br>
     <main class="container">
         <div class="card text-center">
-            <div class="card-header">
-                <h4 class="card-title">OOP CRUD (CREATE)</h4>
+            <div class="card-header bg-info">
+                <h4 class="card-title">CREATE</h4>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -101,9 +108,8 @@ $insert = $model->insert();
 
                             <br class="my-2">
 
-                            <button name="register" class="btn btn-primary" type="submit">Register</button>
+                            <button name="create" class="btn btn-primary" type="submit">Create User</button>
                         </form>
-                        <p class="card-text">Already a member?&nbsp;<a href="index.php">Sign In</a></p>
                     </div>
                 </div>
             </div>
@@ -119,10 +125,6 @@ $insert = $model->insert();
     <script src="assets/js/form-validation.js"></script>
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- SweetAlert -->
-    <!-- <script src="../assets/js/sweetalert.min.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js" integrity="sha512-7VTiy9AhpazBeKQAlhaLRUk+kAMAb8oczljuyJHPsVPWox/QIXDFOnT9DUk1UC8EbnHKRdQowT7sOBe7LAjajQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.min.js" integrity="sha512-t89+ZHqiI+cJO2EZ1zy846TMzc7K0VH22insNeb32hMoVymAMd0aYeLzmNF4WuRLDUXPVo6dzbZ1zI7MBWlqlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 
 </html>
