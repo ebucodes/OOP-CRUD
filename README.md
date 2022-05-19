@@ -6,4 +6,4 @@ Using OOP in PHP to create user login, registration and CRUD.
 
 - Download database "oop.sql" and install on your localhost.
 
-Pretty much easier from there
+Make sure you have a proper understanding of PHP before you begin this adventure
