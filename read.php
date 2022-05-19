@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (strlen($_SESSION['userID']) == "") {
+    header('location:logout.php');
+}
+?>
 <!doctype html>
 <html lang="en">
 
@@ -29,24 +35,35 @@
             }
         }
     </style>
-
-
-    <!-- Custom styles for this template -->
-    <link href="assets/css/style.css" rel="stylesheet">
 </head>
 
 <body class="bg-light">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+            <h4 class="navbar-brand" style="color: red;">Ebu<b style="color: green;">Codes</b></h4>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+
+                </ul>
+                <a href="logout.php" class="btn btn-danger">Log Out</a>
+
+            </div>
+        </div>
+    </nav>
     <br><br><br>
     <main class="container">
         <div class="card text-center">
-            <div class="card-header">
-                <h4 class="card-title">OOP CRUD (Read Individual record)</h4>
+            <div class="card-header bg-primary">
+                <h4 class="card-title">Read</h4>
             </div>
             <?php
-            include("model.php");
-            $model = new Model();
+            include("classes/model.php");
+            $user = new User();
             $id = $_REQUEST['id'];
-            $row = $model->fetch_single($id);
+            $row = $user->fetch_single($id);
 
             if (!empty($row)) {
             ?>

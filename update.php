@@ -1,8 +1,14 @@
 <?php
-include("model.php");
-$model = new Model();
+session_start();
+if (strlen($_SESSION['userID']) == "") {
+    header('location:logout.php');
+}
+?>
+<?php
+include("classes/model.php");
+$user = new User();
 $id = $_REQUEST['id'];
-$row = $model->edit($id);
+$row = $user->edit($id);
 
 if (isset($_POST["update"])) {
     $data['id'] = $id;
@@ -11,24 +17,14 @@ if (isset($_POST["update"])) {
     $data['username'] = $_POST["USERNAME"];
     $data['email'] = $_POST["EMAIL"];
 
-    $update = $model->update($data);
+    $update = $user->update($data);
 
     if ($update) {
-?>
-        <script>
-            alert("User updated successfully");
-        </script>
-        <script>
-            window.location.href = "records.php"
-        </script>
-    <?php
+        echo '<script>alert("User updated successfully");</script>';
+        echo '<script>window.location.href = "records.php"</script>';
     } else {
-    ?>
-        <script>
-            alert("User not updated");
-        </script>
-<?php
-        header("Location: edit.php?id=$id");
+        echo '<script>alert("User not updated");</script>';
+        echo '<script>window.location.href = "edit.php?id=$id"</script>';
     }
 }
 
@@ -49,10 +45,6 @@ if (isset($_POST["update"])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- Favicon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/fontawesome.min.css">
-    <!-- Sweetalert -->
-    <!-- <link rel="stylesheet" href="../assets/css/sweetalert.min.css"> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css" integrity="sha512-hwwdtOTYkQwW2sedIsbuP1h0mWeJe/hFOfsvNKpRB3CkRxq8EW7QMheec1Sgd8prYxGm1OM9OZcGW7/GUud5Fw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" integrity="sha512-gOQQLjHRpD3/SEOtalVq50iDn4opLVup2TF8c4QPI3/NmUPNZOk2FG0ihi8oCU/qYEsw4P6nuEZT2lAG0UNYaw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -68,18 +60,29 @@ if (isset($_POST["update"])) {
             }
         }
     </style>
-
-
-    <!-- Custom styles for this template -->
-    <link href="assets/css/style.css" rel="stylesheet">
 </head>
 
 <body class="bg-light">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+            <h4 class="navbar-brand" style="color: red;">Ebu<b style="color: green;">Codes</b></h4>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+
+                </ul>
+                <a href="logout.php" class="btn btn-danger">Log Out</a>
+
+            </div>
+        </div>
+    </nav>
     <br><br><br>
     <main class="container">
         <div class="card text-center">
-            <div class="card-header">
-                <h4 class="card-title">OOP CRUD (UPDATE)</h4>
+            <div class="card-header bg-success">
+                <h4 class="card-title">UPDATE</h4>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -127,7 +130,6 @@ if (isset($_POST["update"])) {
 
                             <button name="update" class="btn btn-primary" type="submit">Update</button>
                         </form>
-                        <p class="card-text">Already a member?&nbsp;<a href="index.php">Sign In</a></p>
                     </div>
                 </div>
             </div>

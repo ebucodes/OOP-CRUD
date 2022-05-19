@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (strlen($_SESSION['userID']) == "") {
+    header('location:logout.php');
+}
+?>
 <!doctype html>
 <html lang="en">
 
@@ -7,17 +13,13 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.84.0">
-    <title>EbuCodes · Register</title>
+    <title>EbuCodes · OOP</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- Favicon -->
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/fontawesome.min.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Sweetalert -->
-    <!-- <link rel="stylesheet" href="../assets/css/sweetalert.min.css"> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css" integrity="sha512-hwwdtOTYkQwW2sedIsbuP1h0mWeJe/hFOfsvNKpRB3CkRxq8EW7QMheec1Sgd8prYxGm1OM9OZcGW7/GUud5Fw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" integrity="sha512-gOQQLjHRpD3/SEOtalVq50iDn4opLVup2TF8c4QPI3/NmUPNZOk2FG0ihi8oCU/qYEsw4P6nuEZT2lAG0UNYaw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -34,17 +36,39 @@
         }
     </style>
 
-
-    <!-- Custom styles for this template -->
-    <link href="assets/css/style.css" rel="stylesheet">
 </head>
 
-<body class="bg-light">
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+            <h4 class="navbar-brand" style="color: red;">Ebu<b style="color: green;">Codes</b></h4>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+
+                </ul>
+                <a href="logout.php" class="btn btn-danger">Log Out</a>
+
+            </div>
+        </div>
+    </nav>
     <br><br><br>
     <main class="container">
-        <div class="card text-center">
-            <div class="card-header">
-                <h4 class="card-title">OOP CRUD (Data of all users)</h4>
+        <div class="card text-center text-white">
+            <div class="card-header bg-primary">
+                <h4 class="card-title">New User</h4>
+            </div>
+            <div class="card-body">
+                <a href="create.php" class="btn btn-primary"><i></i>&nbsp;Create New User</a>
+            </div>
+        </div>
+        <br>
+        <div class="card text-center text-white">
+            <div class="card-header bg-primary">
+                <h4 class="card-title">All Users</h4>
+
             </div>
             <div class="card-body">
                 <div class="row">
@@ -60,9 +84,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php include("model.php");
-                                $model = new Model();
-                                $rows = $model->fetch();
+                                <?php include("classes/model.php");
+                                $allUsers = new User();
+                                $rows = $allUsers->fetch();
                                 $i = 1;
                                 if (!empty($rows)) {
                                     foreach ($rows as $row) {
@@ -92,9 +116,7 @@
             </div>
         </div>
     </main>
-    <div class="container">
 
-    </div>
 
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -102,11 +124,6 @@
     <script src="assets/js/form-validation.js"></script>
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- SweetAlert -->
-    <!-- <script src="../assets/js/sweetalert.min.js"></script> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js" integrity="sha512-7VTiy9AhpazBeKQAlhaLRUk+kAMAb8oczljuyJHPsVPWox/QIXDFOnT9DUk1UC8EbnHKRdQowT7sOBe7LAjajQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.min.js" integrity="sha512-t89+ZHqiI+cJO2EZ1zy846TMzc7K0VH22insNeb32hMoVymAMd0aYeLzmNF4WuRLDUXPVo6dzbZ1zI7MBWlqlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 
 </html>
